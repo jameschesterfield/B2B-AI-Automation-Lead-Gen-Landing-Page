@@ -31,9 +31,9 @@ const AnimatedCounter: React.FC<Props> = ({ value, duration = 2, suffix = '' }) 
   }, [springValue]);
 
   return (
-    <span className="inline-flex">
+    <span className="inline-flex items-baseline tracking-tightest">
       <span ref={ref}>0</span>
-      {suffix}
+      <span className="-ml-[1.5px]">{suffix}</span>
     </span>
   );
 };

@@ -4,57 +4,66 @@ export default function WhatNext() {
   const steps = [
     {
       icon: Phone,
-      title: "Short Intro Call (15 minutes)",
-      description: "We'll ask about your business and current challenges."
+      number: "01",
+      label: "Intro Call",
+      description: "A precision 15-minute diagnostic challenging your current operational status quo."
     },
     {
       icon: ShieldOff,
-      title: "No Sales Pitch",
-      description: "This is about understanding your operations, not selling you anything."
+      number: "02",
+      label: "Pure Insight",
+      description: "Zero pressure. This session serves clarity, not conversion. Insight is our currency."
     },
     {
       icon: FileText,
-      title: "Clear Recommendations",
-      description: "You'll receive a detailed audit with specific next steps."
+      number: "03",
+      label: "Strategic Audit",
+      description: "A calculated blueprint mapping every bottleneck to an autonomous solution."
     },
     {
       icon: ThumbsUp,
-      title: "You Decide What to Do Next",
-      description: "No pressure, no follow-up calls. The choice is entirely yours."
+      number: "04",
+      label: "Linear Output",
+      description: "The roadmap belongs to you. Execute with us, or carry the strategy elsewhere."
     }
   ];
 
   return (
-    <section className="py-32 px-6">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-20 tracking-tight">
-          What Happens Next
-        </h2>
+    <section className="py-40 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-24">
+          <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tightest font-display">
+            Selective <span className="text-brand-blue/70 italic font-light">Engagement.</span>
+          </h2>
+          <p className="text-gray-500 text-sm font-light tracking-wide max-w-xl mx-auto uppercase mt-4">
+            A frictionless path to operational autonomy.
+          </p>
+        </div>
 
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div
                 key={index}
-                className="group flex items-start gap-8 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md transition-all duration-500 hover:bg-white/[0.08] hover:border-brand-blue/30"
+                className="text-center group"
               >
-                <div className="flex-shrink-0 relative">
-                  <div className="w-16 h-16 rounded-2xl bg-brand-blue/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                    <Icon className="text-brand-blue" size={28} />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-blue/[0.03] mb-8 group-hover:scale-110 transition-transform duration-700">
+                  <Icon className="text-brand-blue/40" size={20} />
+                </div>
+                
+                <div className="flex flex-col items-center mb-8">
+                  <div className="text-5xl font-semibold text-white tracking-tightest font-display inline-block opacity-80 group-hover:opacity-100 transition-opacity duration-700">
+                    {step.number}
                   </div>
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-white text-black font-bold rounded-full flex items-center justify-center text-sm shadow-xl">
-                    {index + 1}
+                  <div className="text-xl font-light text-brand-blue/60 mt-3 font-display italic">
+                    {step.label}
                   </div>
                 </div>
-                <div className="flex-1 pt-1">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-blue transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-lg text-gray-400 leading-relaxed font-medium">
-                    {step.description}
-                  </p>
-                </div>
+
+                <p className="text-gray-600 text-[12px] font-light leading-relaxed max-w-[200px] mx-auto uppercase tracking-widest">
+                  {step.description}
+                </p>
               </div>
             );
           })}

@@ -1,7 +1,10 @@
 import { Search, AlertCircle, Wrench, CheckSquare } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { useState } from 'react';
 
 export default function HowItWorks() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const steps = [
     {
       number: "1",
@@ -32,45 +35,78 @@ export default function HowItWorks() {
   return (
     <section className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-20 tracking-tight">
-          How It Works
+        <h2 className="text-4xl md:text-5xl font-semibold text-white text-center mb-20 tracking-tight font-display">
+          How It <span className="text-brand-blue">Works</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="relative p-10 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md overflow-hidden group transition-colors duration-500 hover:border-brand-blue/30"
-              >
-                {/* Decorative background glow */}
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-blue/10 rounded-full blur-[80px] group-hover:bg-brand-blue/20 transition-colors duration-500" />
-                
-                <div className="flex items-start gap-8 relative z-10">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-2xl bg-brand-blue/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Icon className="text-brand-blue" size={28} />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-brand-blue text-sm font-bold mb-3 tracking-widest uppercase">
-                      STEP {step.number}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-400 text-lg leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {steps.map((step, index) => (
+            <StepCard 
+              key={index} 
+              step={step} 
+              isHovered={hoveredIndex === index}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function StepCard({ step, isHovered, onMouseEnter, onMouseLeave }: any) {
+  const Icon = step.icon;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // More subtle parallax
+  const iconX = useTransform(mouseX, [-100, 100], [-5, 5]);
+  const iconY = useTransform(mouseY, [-100, 100], [-5, 5]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - (rect.left + rect.width / 2));
+    mouseY.set(e.clientY - (rect.top + rect.height / 2));
+  };
+
+  return (
+    <motion.div
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={() => {
+        onMouseLeave();
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
+      onMouseMove={handleMouseMove}
+      animate={{
+        y: isHovered ? -2 : 0,
+      }}
+      className="relative p-10 bg-white/[0.02] border border-white/[0.05] rounded-3xl overflow-hidden group transition-all duration-700 hover:border-brand-blue/20"
+    >
+      <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-blue/[0.03] rounded-full blur-[80px] group-hover:bg-brand-blue/[0.08] transition-colors duration-700" />
+      
+      <div className="flex items-start gap-8 relative z-10">
+        <div className="flex-shrink-0">
+          <motion.div 
+            style={{ x: iconX, y: iconY }}
+            className="w-14 h-14 rounded-2xl bg-brand-blue/5 flex items-center justify-center group-hover:scale-105 transition-transform duration-700"
+          >
+            <Icon className="text-brand-blue/60" size={24} />
+          </motion.div>
+        </div>
+        <div className="flex-1">
+          <div className="text-brand-blue/50 text-xs font-medium mb-3 tracking-widest uppercase">
+            STEP {step.number}
+          </div>
+          <h3 className="text-xl font-semibold text-white mb-4">
+            {step.title}
+          </h3>
+          <p className="text-gray-500 text-base leading-relaxed font-light">
+            {step.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
   );
 }

@@ -6,19 +6,19 @@ export default function WhyUs() {
     {
       icon: Calendar,
       value: 8,
-      suffix: "+ Years",
+      label: "Years",
       description: "Building systems and working with data across industries"
     },
     {
       icon: Zap,
       value: 200,
-      suffix: "+ Automations",
+      label: "Automations",
       description: "Currently running in production for real businesses"
     },
     {
       icon: Building2,
-      value: 12, // Using a number for animation
-      suffix: "+ Industries",
+      value: 12,
+      label: "Industries",
       description: "From manufacturing to professional services to e-commerce"
     }
   ];
@@ -26,25 +26,30 @@ export default function WhyUs() {
   return (
     <section className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-20 tracking-tight">
-          Why Work With Us
+        <h2 className="text-4xl md:text-5xl font-semibold text-white text-center mb-20 tracking-tightest font-display">
+          Precision <span className="text-brand-blue/70 italic font-light">Infrastructure.</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-12">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div
                 key={index}
-                className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-blue/30 backdrop-blur-sm transition-all duration-500 group"
+                className="text-center group"
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-brand-blue/10 mb-6 group-hover:scale-110 transition-transform duration-500">
-                  <Icon className="text-brand-blue" size={32} />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-blue/[0.03] mb-8 group-hover:scale-110 transition-transform duration-700">
+                  <Icon className="text-brand-blue/40" size={24} />
                 </div>
-                <h3 className="text-4xl font-bold text-white mb-4">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                </h3>
-                <p className="text-lg text-gray-400 leading-relaxed">
+                <div className="flex flex-col items-center mb-6">
+                  <div className="text-5xl font-semibold text-white tracking-tightest font-display flex items-baseline">
+                    <AnimatedCounter value={stat.value} suffix="+" />
+                  </div>
+                  <div className="text-2xl font-light text-brand-blue/60 mt-2 font-display italic">
+                    {stat.label}
+                  </div>
+                </div>
+                <p className="text-gray-500 text-sm font-light leading-relaxed max-w-[240px] mx-auto uppercase tracking-widest">
                   {stat.description}
                 </p>
               </div>

@@ -5,13 +5,27 @@ export default {
     extend: {
       colors: {
         brand: {
-          blue: '#4a9eff',
-          dark: '#0a0a0a',
-          card: '#1a1a1a',
+          blue: '#5b8def', // More muted, professional blue
+          dark: '#050505', // Deeper black
+          card: '#0f0f0f', // Very subtle card background
         }
       },
       animation: {
         'shimmer': 'shimmer 2s linear infinite',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'sans-serif'],
+      },
+      letterSpacing: {
+        tightest: '-.075em',
+        tighter: '-.05em',
+        tight: '-.025em',
+        normal: '0',
+        wide: '.025em',
+        wider: '.05em',
+        widest: '.1em',
+        'subtle': '0.01em',
       },
       keyframes: {
         shimmer: {

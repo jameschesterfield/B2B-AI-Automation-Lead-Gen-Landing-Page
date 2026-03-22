@@ -1,64 +1,41 @@
 import { ArrowRight } from 'lucide-react';
-import Magnetic from './Magnetic';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
-  const title = "Your operations shouldn't feel like manual labor";
-  const words = title.split(" ");
-
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    reveal: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const child: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    reveal: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
       <div className="max-w-5xl mx-auto text-center relative z-10">
         <motion.h1 
-          variants={container}
-          initial="hidden"
-          animate="reveal"
-          className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-10 leading-tight tracking-tightest font-display"
         >
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              variants={child}
-              className="inline-block mr-[0.2em]"
-            >
-              {word === "manual" || word === "labor" ? (
-                <span className="text-brand-blue">{word}</span>
-              ) : (
-                word
-              )}
-            </motion.span>
-          ))}
+          Precision. Intelligence. <br/>
+          <span className="text-brand-blue/80 italic font-light opacity-80">Autonomous Flow.</span>
         </motion.h1>
-        <p className="text-xl md:text-2xl text-gray-400 mb-12 leading-relaxed max-w-3xl mx-auto">
-          Most businesses run on disconnected tools and repetitive tasks. AI automation isn't about replacing people—it's about building systems that let your team focus on what actually matters.
-        </p>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="text-base md:text-lg text-gray-500 mb-12 leading-relaxed max-w-xl mx-auto font-light tracking-wide uppercase"
+        >
+          The next evolution in systemic business efficiency.
+        </motion.p>
         
         <div className="flex justify-center">
-          <Magnetic strength={0.3}>
-            <a
-              href="#audit"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-black text-xl font-semibold rounded-full hover:bg-brand-blue hover:text-white transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(74,158,255,0.4)]"
-            >
-              Request an Automation Audit
-              <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </Magnetic>
+          <motion.a
+            href="#audit"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-white/[0.03] border border-white/[0.08] text-white text-lg font-medium rounded-full hover:bg-white/[0.06] transition-all duration-700"
+          >
+            <div className="absolute inset-x-0 -bottom-[1px] h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            Strategic Automation Audit
+            <ArrowRight size={20} className="text-gray-500 group-hover:text-brand-blue transition-colors duration-700" />
+          </motion.a>
         </div>
       </div>
     </section>
