@@ -25,30 +25,33 @@ export default function WhatNext() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-[#1a1a1a]">
+    <section className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-20 tracking-tight">
           What Happens Next
         </h2>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div
                 key={index}
-                className="flex items-start gap-6 p-6 bg-[#2a2a2a] rounded-xl hover:bg-[#333333] transition-all duration-300"
+                className="group flex items-start gap-8 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md transition-all duration-500 hover:bg-white/[0.08] hover:border-brand-blue/30"
               >
-                <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-full bg-[#4a9eff] bg-opacity-10 flex items-center justify-center">
-                    <Icon className="text-[#4a9eff]" size={24} />
+                <div className="flex-shrink-0 relative">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-blue/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                    <Icon className="text-brand-blue" size={28} />
+                  </div>
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-white text-black font-bold rounded-full flex items-center justify-center text-sm shadow-xl">
+                    {index + 1}
                   </div>
                 </div>
                 <div className="flex-1 pt-1">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                    {index + 1}. {step.title}
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-blue transition-colors">
+                    {step.title}
                   </h3>
-                  <p className="text-lg text-[#b0b0b0] leading-relaxed">
+                  <p className="text-lg text-gray-400 leading-relaxed font-medium">
                     {step.description}
                   </p>
                 </div>
